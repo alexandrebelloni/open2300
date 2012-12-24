@@ -65,6 +65,8 @@ int main(int argc, char *argv[])
 	struct config_type config;
 	time_t basictime;
 
+	time(&basictime);
+
 	get_configuration(&config, argv[2]);
 
 	ws2300 = open_weatherstation(config.serial_device_name);
@@ -161,8 +163,7 @@ int main(int argc, char *argv[])
 
 	/* GET DATE AND TIME FOR LOG FILE, PLACE BEFORE ALL DATA IN LOG LINE */
 
-	time(&basictime);
-	strftime(datestring, sizeof(datestring), "%Y%m%d%H%M%S %Y-%b-%d %H:%M:%S",
+	strftime(datestring, sizeof(datestring), "%s %F %T%z",
 	         localtime(&basictime));
 
 

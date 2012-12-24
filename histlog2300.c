@@ -250,8 +250,8 @@ int main(int argc, char *argv[])
 		time_lastrecord_tm.tm_min += interval;
 		mktime(&time_lastrecord_tm);                 //normalize time_lastlog_tm
 		
-		strftime(datestring, sizeof(datestring), "%Y%m%d%H%M%S %Y-%b-%d %H:%M:%S",
-		         &time_lastrecord_tm);
+		strftime(datestring, sizeof(datestring), "%s %F %T%z",
+		         localtime(&time_lastrecord_tm));
 
 		// Print out
 		fseek(fileptr, 0L, SEEK_END);
